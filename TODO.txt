@@ -1,0 +1,10 @@
+Emulators:
+	GameBoy-
+	    Color	Mednafen
+	    Advance	Mednafen
+	    Advance sp	Mednafen
+	Atari		Mednafen
+	Nintendo64 	mupen64plus
+	Sega		Mednafen
+	NES/SNES	Mednafen
+	playstation	Mednafen
