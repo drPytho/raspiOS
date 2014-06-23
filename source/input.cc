@@ -5,17 +5,27 @@ Input::Input()
 
 }
 
-Input::update()
+Input::~Input()
+{
+
+}
+
+void Input::updateInput()
 {
 	while(SDL_PollEvent(event))
 	{
-		if(event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+		switch(event->type)
 		{
-			getChar();
+			case SDL_KEYDOWN:
+				actionKeyDown(event->key.keysym);
+				break;
+			case SDL_KEYUP:
+				actionKeyUp(event->key.keysym);
+				break;
+			case SDL_QUIT:
+				closeRequested = true;
+				break;
 		}
-
-		if(event->type == SDL_QUIT)
-			closeRequested = true;
 	}
 }
 

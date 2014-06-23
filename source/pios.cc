@@ -35,7 +35,6 @@ Pios::Pios():
 		exit(-1);
 	}
 
-
 }
 
 Pios::~Pios()
@@ -69,7 +68,10 @@ int Pios::run()
 			
 			
 			//Input & Update here
-			
+			Input();
+
+
+
 			if(frameCounter >= Time::SECOND)
 			{
 				std::cout << frames << " fps" << std::endl;
@@ -104,4 +106,23 @@ int Pios::halt()
 	return 0;
 }
 
+void Pios::Input()
+{
+	updateInput();
+	isRunning = !isCloseRequested();
+}
 
+void Pios::Update()
+{
+
+}
+
+void actionKeyDown(SDL_Keysym& sym)
+{
+
+}
+
+void actionKeyUp(SDL_Keysym& sym)
+{
+
+}

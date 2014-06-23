@@ -5,13 +5,14 @@
 #include <Awesomium/WebCore.h>
 #include <iostream>
 #include "Time.h"
+#include "input.h"
 
 #define FRAME_CAP 5000
 #define FRAME_TIME 1.0/FRAME_CAP
 
 
 
-class Pios
+class Pios:public Input
 {
 public:
 	Pios();
@@ -31,6 +32,9 @@ private:
 	//void operator=(const Pios& src){}
 
 private:
+
+	void actionKeyDown(SDL_Keysym& sym);
+	void actionKeyUp(SDL_Keysym& sym);
 	
 	//SDL window
 	SDL_Window* window;
@@ -51,10 +55,6 @@ private:
 	//Vars for calculating FPS
 	int frames;
 	long frameCounter;
-		
-	
-
-
 };
 
 #endif

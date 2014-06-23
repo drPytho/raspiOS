@@ -14,13 +14,7 @@ public:
 		clock_gettime(CLOCK_REALTIME, &td);
 		return td.tv_nsec;
 	}
-
-
-
-private:
-	static timespec* time;
 };
-
 
 #endif
 
