@@ -1,6 +1,7 @@
 #ifndef INPUT
 #define INPUT
 
+#include "math.h"
 class Window;
 
 class Input

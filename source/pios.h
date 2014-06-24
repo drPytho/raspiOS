@@ -5,21 +5,21 @@
 #include <Awesomium/WebCore.h>
 #include <iostream>
 #include "Time.h"
-#include "input.h"
+#include "window.h"
 
 #define FRAME_CAP 5000
 #define FRAME_TIME 1.0/FRAME_CAP
 
 
 
-class Pios:public Input
+class Pios
 {
 public:
 	Pios();
 	~Pios();
 
-	int run();
-	int halt();
+	void run();
+	void halt();
 
 private:
 	//void LoadInfo();
@@ -32,29 +32,22 @@ private:
 	void operator=(const Pios& src){}
 
 private:
-
-	void actionKeyDown(SDL_Keysym& sym);
-	void actionKeyUp(SDL_Keysym& sym);
-	
-	//SDL window
-	SDL_Window* window;
-
-	//SDL surface to draw on
-	SDL_Surface* screen;
+	//Window
+	Window* window;
 
 	//Flow controll
-	bool isRunning;
+	bool m_isRunning;
 
-	long lastTime;
+	double lastTime;
 	double unprocessedTime;
 
 	bool render;
-	long startTime;
-	long passedTime;
+	double startTime;
+	double passedTime;
 
 	//Vars for calculating FPS
 	int frames;
-	long frameCounter;
+	double frameCounter;
 };
 
 #endif

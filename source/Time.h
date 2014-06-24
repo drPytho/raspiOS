@@ -1,18 +1,19 @@
 #ifndef TIME
 #define TIME 
 
+#include <time.h>
 #include <sys/time.h>
 
 class Time
 {
 public:
-	static const unsigned int SECOND = 1000000000;
+	static const long NANOSECONDS_PER_SECOND = 1000000000L;
 
-	static inline long getTime()
+	static inline double getTime()
 	{
-		timespec td;
-		clock_gettime(CLOCK_REALTIME, &td);
-		return td.tv_nsec;
+		timespec ts;
+		clock_gettime(CLOCK_REALTIME, &ts);
+		return (double)(((long) ts.tv_sec * NANOSECONDS_PER_SECOND) + ts.tv_nsec)/((double)(NANOSECONDS_PER_SECOND));
 	}
 };
 

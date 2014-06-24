@@ -19,15 +19,15 @@ Window::Window(int width, int height, const std::string& title) :
 
 	//Fullscreen, Window is vissable, Window has input focus
 	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED);
-	if (this->window == NULL)
+	if (m_window == NULL)
 	{
 		std::cout << "SDL failed to create a window with SDL_Error: " << SDL_GetError() << std::endl;
 		exit(-1);
 	}
 
 	//Get the surface to draw on 
-	m_screen = SDL_GetWindowSurface(this->window);
-	if(this->screen == NULL)
+	m_screen = SDL_GetWindowSurface(m_window);
+	if(m_screen == NULL)
 	{
 		std::cout << "SDL failed to return window surface with SDL_Error: " << SDL_GetError() << std::endl;
 		exit(-1);
@@ -42,6 +42,8 @@ Window::~Window()
 
 void Window::Update()
 {
+
+	//Substetute with memset 0
 	for(int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
 	{
 		m_input.SetMouseDown(i, false);
@@ -101,12 +103,7 @@ void Window::Update()
 
 void Window::SwapBuffers()
 {
-	//SDL_GL_SwapWindow(m_window);
-}
-
-void Window::BindAsRenderTarget() const
-{
-	//
+	SDL_UpdateWindowSurface(m_window);
 }
 
 void Window::SetFullScreen(bool value)
