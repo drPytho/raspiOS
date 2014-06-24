@@ -12,28 +12,7 @@ Pios::Pios():
 	frames(0),
 	frameCounter(0)
 {
-	//Init SDL with everything
-	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
-	{
-		std::cout << "SDL failed to initialize. Error - " << SDL_GetError() << std::endl;
-		exit(-1);
-	}
 
-	//Fullscreen, Window is vissable, Window has input focus
-	this->window = SDL_CreateWindow("PIOS - V 0.0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, /*SDL_WINDOW_FULLSCREEN_DESKTOP |*/ SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED);
-	if (this->window == NULL)
-	{
-		std::cout << "SDL failed to create a window with SDL_Error: " << SDL_GetError() << std::endl;
-		exit(-1);
-	}
-
-	//Get the surface to draw on 
-	this->screen = SDL_GetWindowSurface(this->window);
-	if(this->screen == NULL)
-	{
-		std::cout << "SDL failed to return window surface with SDL_Error: " << SDL_GetError() << std::endl;
-		exit(-1);
-	}
 
 }
 

@@ -28,8 +28,8 @@ private:
 	void Input();
 
 private:
-	//Pios& Pios(const Pios& src){}
-	//void operator=(const Pios& src){}
+	Pios(const Pios& src){}
+	void operator=(const Pios& src){}
 
 private:
 

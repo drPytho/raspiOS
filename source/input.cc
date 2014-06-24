@@ -1,32 +1,31 @@
 #include "input.h"
+#include "window.h"
+#include <SDL2/SDL.h>
+#include <cstring>
 
-Input::Input()
+Input::Input(Window* window) :
+	m_mouseX(0),
+	m_mouseY(0),
+	m_window(window)
 {
+	memset(m_inputs, 		0, NUM_KEYS * sizeof(bool));
+	memset(m_downKeys, 		0, NUM_KEYS * sizeof(bool));
+	memset(m_upKeys, 		0, NUM_KEYS * sizeof(bool));
 
+	memset(m_mouseInput,	0, NUM_MOUSEBUTTONS * sizeof(bool));
+	memset(m_downMouse, 	0, NUM_MOUSEBUTTONS * sizeof(bool));
+	memset(m_upMouse, 		0, NUM_MOUSEBUTTONS * sizeof(bool));
 }
 
-Input::~Input()
+void Input::SetCursor(bool visible) const
 {
-
+	if(visible)
+		SDL_ShowCursor(1);
+	else
+		SDL_ShowCursor(0);
 }
 
-void Input::updateInput()
+void Input::SetMousePosition(const Vector2f& pos) const
 {
-	while(SDL_PollEvent(event))
-	{
-		switch(event->type)
-		{
-			case SDL_KEYDOWN:
-				actionKeyDown(event->key.keysym);
-				break;
-			case SDL_KEYUP:
-				actionKeyUp(event->key.keysym);
-				break;
-			case SDL_QUIT:
-				closeRequested = true;
-				break;
-		}
-	}
+	SDL_WarpMouseInWindow(m_window->GetSDLWindow(), (int)pos.GetX(), (int)pos.GetY());
 }
-
-
