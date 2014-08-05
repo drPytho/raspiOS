@@ -19,10 +19,8 @@ public:
 	~Pios();
 
 	void run();
-	void halt();
 
 private:
-	//void LoadInfo();
 	void Render();
 	void Update();
 	void Input();

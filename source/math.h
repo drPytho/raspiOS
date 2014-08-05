@@ -1,6 +1,8 @@
 #ifndef MATH
 #define MATH 
 
+
+//Tem simple need to fix this up
 class Vector2f
 {
 public:

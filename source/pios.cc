@@ -11,7 +11,9 @@ Pios::Pios():
 	frameCounter(0)
 {
 	//Create a new window here
-	window = new Window(640, 480, "RaspiOS, V0.0.1 ALFA");
+	window = new Window(640, 480, "RaspiOS, V0.0.2 ALFA");
+	window->SetFullScreen(1);
+	window->GetInput().SetCursor(0);
 }
 
 Pios::~Pios()
@@ -76,11 +78,6 @@ void Pios::Render()
 	//Render code here
 
 	window->SwapBuffers();
-}
-
-void Pios::halt()
-{
-	m_isRunning = false;
 }
 
 void Pios::Input()
