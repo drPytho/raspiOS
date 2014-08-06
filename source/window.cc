@@ -1,8 +1,8 @@
 #include "window.h"
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h>
 
-Window::Window(int width, int height, const std::string& title) :
-	m_width(width),
+Window::Window(int width, int height, const std::string& title)
+:	m_width(width),
 	m_height(height),
 	m_title(title),
 	m_input(this),
@@ -27,7 +27,7 @@ Window::Window(int width, int height, const std::string& title) :
 	}
 
 	//Get the surface to draw on 
-	m_renderer = SDL_GetWindowSurface(m_window);
+	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 	if(m_renderer == nullptr)
 	{
 		std::cout << "SDL failed to return window surface with SDL_Error: " << SDL_GetError() << std::endl;
@@ -60,7 +60,12 @@ Window::~Window()
 
 void Window::Update()
 {
+	UpdateInput();
 
+}
+
+void Window::UpdateInput()
+{
 	//Substetute with memset 0
 	for(int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
 	{
@@ -119,9 +124,14 @@ void Window::Update()
 	}
 }
 
-void Window::SwapBuffers()
+void Window::RenderToDisplay()
 {
-	SDL_UpdateWindowSurface(m_window);
+	SDL_RenderPresent( m_renderer );
+}
+
+void Window::ClearDisplay()
+{
+
 }
 
 void Window::SetFullScreen(bool value)

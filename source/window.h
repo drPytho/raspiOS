@@ -13,7 +13,8 @@ public:
 	virtual ~Window();
 
 	void Update();
-	void SwapBuffers();
+	void RenderToDisplay();
+	void ClearDisplay();
 
 	inline bool IsCloseRequested() const { return m_isCloseRequested; }
 	inline int GetWidth() const { return m_width; }
@@ -28,6 +29,11 @@ public:
 	void SetFullScreen(bool value);
 protected:
 private:
+
+
+	void UpdateInput();
+	
+
 	int m_width;
 	int m_height;
 	std::string m_title;

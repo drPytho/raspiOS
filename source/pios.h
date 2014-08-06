@@ -4,11 +4,10 @@
 #include <SDL2/SDL.h>
 #include <Awesomium/WebCore.h>
 #include <iostream>
-#include "Time.h"
-#include "window.h"
+#include "time.h"
+#include "ui.h"
 
-#define FRAME_CAP 5000
-#define FRAME_TIME 1.0/FRAME_CAP
+
 
 
 
@@ -30,22 +29,9 @@ private:
 	void operator=(const Pios& src){}
 
 private:
-	//Window
-	Window* window;
-
-	//Flow controll
-	bool m_isRunning;
-
-	double lastTime;
-	double unprocessedTime;
-
-	bool render;
-	double startTime;
-	double passedTime;
-
-	//Vars for calculating FPS
-	int frames;
-	double frameCounter;
+	
+	ui* userInterface;
+	//Settings* linuxAPI;
 };
 
 #endif
