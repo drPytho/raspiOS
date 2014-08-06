@@ -18,20 +18,38 @@ Window::Window(int width, int height, const std::string& title) :
 	}
 
 	//Fullscreen, Window is vissable, Window has input focus
-	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED);
-	if (m_window == NULL)
+	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_GRABBED);
+	if (m_window == nullptr)
 	{
 		std::cout << "SDL failed to create a window with SDL_Error: " << SDL_GetError() << std::endl;
 		exit(-1);
 	}
 
 	//Get the surface to draw on 
-	m_screen = SDL_GetWindowSurface(m_window);
-	if(m_screen == NULL)
+	m_renderer = SDL_GetWindowSurface(m_window);
+	if(m_renderer == nullptr)
 	{
 		std::cout << "SDL failed to return window surface with SDL_Error: " << SDL_GetError() << std::endl;
 		exit(-1);
 	}
+
+	SDL_RendererInfo info;
+	SDL_GetRendererInfo(m_renderer, &info);
+	if(info.flags & SDL_RENDERER_SOFTWARE) {
+		printf("WARNING: Using software renderer due to hardware fallback. Performance will suffer.\n");
+	}
+	if(!(info.flags & SDL_RENDERER_TARGETTEXTURE)) {
+		printf("ERROR: Renderer does not support render-to-texture. Game will not run.");
+		SDL_DestroyWindow(m_window);
+		SDL_Quit();
+		exit(-1);
+	}
+
+	SDL_RenderSetLogicalSize(m_renderer, m_width, m_height);
+
+	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
+
 }
 
 Window::~Window()
