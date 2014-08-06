@@ -18,7 +18,7 @@ public:
 	ui( Window* window, const std::string& url);
 	~ui();
 
-	static SDL_Surface* GetSSurf(WebView* wv, int width, int height);
+	static void GetSSurf(WebView* wv, SDL_Texture* texture);
 protected:
 	
 

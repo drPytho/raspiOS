@@ -5,15 +5,30 @@
 #include <string>
 #include <iostream>
 
+#include <time.h>
+
 
 #define WIDTH 640
 #define HEIGHT 480
 
 using namespace Awesomium;
 
+
+
+#include <sys/time.h>
+static const long NANOSECONDS_PER_SECOND = 1000000000L;
+
+
+
+double GetTime()
+{
+	timespec ts;
+	clock_gettime(CLOCK_REALTIME, &ts);
+	return (double)(((long) ts.tv_sec * NANOSECONDS_PER_SECOND) + ts.tv_nsec)/((double)(NANOSECONDS_PER_SECOND));
+}
+
 void GetSSurf(WebView* wv, SDL_Texture* texture)
 {
-
 	BitmapSurface* bitSurf = static_cast<BitmapSurface*>(wv->surface());
 
 	if(bitSurf->is_dirty())
@@ -30,9 +45,7 @@ void GetSSurf(WebView* wv, SDL_Texture* texture)
 		bitSurf->CopyTo(colorBuffer, pitch, 4, false, false);
 		SDL_UnlockTexture(texture);
 	}
-	bitSurf->SaveToJPEG(WSLit("image.png"));
-
-	return;
+	return/* :) */;
 }
 
 int main(int argc, char const *argv[])
@@ -62,7 +75,7 @@ int main(int argc, char const *argv[])
 	}
 
 	//Get the surface to draw on 
-	m_screen = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+	m_screen = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 	if(m_screen == NULL)
 	{
 		std::cout << "SDL failed to return window surface with SDL_Error: " << SDL_GetError() << std::endl;
@@ -70,6 +83,22 @@ int main(int argc, char const *argv[])
 		SDL_Quit();
 		exit(-1);
 	}
+
+	SDL_RendererInfo info;
+	SDL_GetRendererInfo(m_screen, &info);
+	if(info.flags & SDL_RENDERER_SOFTWARE) {
+		printf("WARNING: Using software renderer due to hardware fallback. Performance will suffer.\n");
+	}
+	if(!(info.flags & SDL_RENDERER_TARGETTEXTURE)) {
+		printf("ERROR: Renderer does not support render-to-texture. Game will not run.");
+		SDL_DestroyWindow(m_window);
+		SDL_Quit();
+		exit(-1);
+	}
+
+	SDL_RenderSetLogicalSize(m_screen, WIDTH, HEIGHT);
+
+	SDL_SetRenderDrawColor(m_screen, 0, 0, 0, 0);
 
 
 	WebCore *m_webCore = WebCore::Initialize(WebConfig());
@@ -94,17 +123,14 @@ int main(int argc, char const *argv[])
 
 	std::cout << "RUNNING TEST FUNCTION" << std::endl;
 
-
+	double startTime = GetTime();
 	GetSSurf(m_webView, texture);
-
+	std::cout << "Function timed in at " << GetTime() - startTime << "time units\n";
 
 	//RUNNING
 
 	std::cout << "RUNNING" << std::endl;
 
-	SDL_SetRenderTarget(m_screen, NULL);
-	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-	SDL_RenderCopy(m_screen, texture, NULL, NULL);
 
 	while (1) {
 		SDL_Event e;
@@ -114,7 +140,10 @@ int main(int argc, char const *argv[])
 			}
 		}
 
-		
+		SDL_RenderClear(m_screen);
+		SDL_RenderCopy(m_screen, texture, NULL, NULL);
+		SDL_RenderPresent( m_screen );
+		SDL_Delay(10);
 	}
 
 

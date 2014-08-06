@@ -33,35 +33,23 @@ ui::~ui()
 
 }
 
-SDL_Surface* ui::GetSSurf(WebView* wv, int width, int height)
+void GetSSurf(WebView* wv, SDL_Texture* texture)
 {
-	Uint32 RMASK, GMASK, BMASK, AMASK;
-
-	RMASK = 0xFF000000;
-	GMASK = 0x00FF0000;
-	BMASK = 0x0000FF00;
-	AMASK = 0x000000FF;
-
 	BitmapSurface* bitSurf = static_cast<BitmapSurface*>(wv->surface());
-	
-	unsigned char* colorBuffer = NULL;
-	bitSurf->CopyTo(colorBuffer, width * 4, 4, true, false);
 
-	if(colorBuffer == NULL)
+	if(bitSurf->is_dirty())
 	{
-		//YOu fucked up
+
+		unsigned char* colorBuffer = NULL;
+		int pitch;
+		if (SDL_LockTexture(texture, NULL, (void**)&colorBuffer, &pitch) < 0)
+		{
+			//Misslyckades med LockTexture
+			std::cout << "You failed to lock texture \n" << SDL_GetError() << "\n"; 
+			return;
+		}
+		bitSurf->CopyTo(colorBuffer, pitch, 4, false, false);
+		SDL_UnlockTexture(texture);
 	}
-
-	SDL_Surface* tempSurf = NULL;
-
-	tempSurf = SDL_CreateRGBSurfaceFrom(colorBuffer, width, height, 32, width * 4, RMASK, GMASK, BMASK, AMASK);
-	
-	delete[] colorBuffer;
-
-	if(tempSurf == NULL)
-	{
-		//You fucked up
-	}
-
-	return tempSurf;
+	return/* :) */;
 }

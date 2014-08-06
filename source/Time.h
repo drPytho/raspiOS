@@ -4,12 +4,12 @@
 #include <time.h>
 #include <sys/time.h>
 
-class Time
+namespace Time
 {
-public:
+
 	static const long NANOSECONDS_PER_SECOND = 1000000000L;
 
-	static inline double getTime()
+	static double getTime()
 	{
 		timespec ts;
 		clock_gettime(CLOCK_REALTIME, &ts);
