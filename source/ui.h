@@ -25,10 +25,13 @@ public:
 	void start();
 	void stop();
 
-	void Graphics(bool state){ m_graphicsOn = state; }
+	// If the program is in the main focus or not and base the 
+	// amount of actions the program should take
+	void backgroundMood(bool state){ m_backgroundMood = state; }
 
+	// 
 	inline const Input& GetInput() const { return m_window->GetInput(); }
-	inline Window* getWindow(){ return m_window; }
+	inline Window* getWindow() { return m_window; }
 
 protected:
 private:
@@ -38,7 +41,13 @@ private:
 	void render();
 	void input();
 
-	bool m_graphicsOn;
+
+	void initHTML(std::string paths);
+	void updateHTML(std::string paths);
+	JSObject* const createHTMLInfoObject(const std::string& searchPaths) const;
+
+
+	bool m_backgroundMood;
 
 	//Window size
 	int m_width;

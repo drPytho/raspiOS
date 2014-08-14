@@ -13,6 +13,7 @@ public:
 	virtual ~Window();
 
 	void Update();
+	void UpdateInput();
 	void RenderToDisplay();
 	void ClearDisplay();
 
@@ -31,7 +32,7 @@ protected:
 private:
 
 
-	void UpdateInput();
+	
 	
 
 	int m_width;

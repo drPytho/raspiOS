@@ -60,7 +60,6 @@ Window::~Window()
 
 void Window::Update()
 {
-	UpdateInput();
 
 }
 
