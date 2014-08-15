@@ -9,6 +9,7 @@
 #include <string>
 #include "time.h"
 #include "input.h"
+#include "LPI.h"
 
 
 
