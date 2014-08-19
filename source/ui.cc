@@ -259,9 +259,5 @@ void ui::GetSSurf(SDL_Texture* texture)
 
 JSObject* const ui::createHTMLInfoObject(const std::string& searchPaths) const
 {
-
-
-
-
-
+	
 }

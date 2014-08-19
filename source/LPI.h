@@ -14,16 +14,16 @@ namespace LPI
 	bool ChangeSetting(std::string setting, std::string value);
 	std::vector<std::string> getFilesInFolder(std::string paths[]);
 
-	typedef char fType;
-
-	enum
+	typedef	enum e_tFile
 	{
 		D_VIDEO 	= 1 << 0,
 		D_AUDIO 	= 1 << 1,
 		D_EMULATOR 	= 1 << 2,
 		D_GRAPHICS	= 1 << 3,
 		D_OTHER 	= 1 << 4
-	};
+	} tFile;
+
+	inline tFile operator|(tFile a, tFile b){return static_cast<tFile>(static_cast<int>(a) | static_cast<int>(b));}
 
 	//List of endings 
 	const char* const VIDEO[] 		= {"mp4", "avi"};					const int VIDEO_SIZE = 2;
@@ -33,7 +33,7 @@ namespace LPI
 
 
 	fType getFileType(char* extention);
-};
+}
 
 
 #endif
