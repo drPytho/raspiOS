@@ -38,6 +38,24 @@ ui::~ui()
 
 
 /**
+* @description
+*	  Should clean up everything that can throw an error
+* @post
+*    You should not try to run the ui after this
+* @param [0, n-1] paramName
+*    None
+* @return
+*    bool - true on success
+* @throw
+*    None so far
+*/
+bool ui::terminate()
+{
+
+}
+
+
+/**
  * @description
  *	  Starts the application clock, goes through and updates everything.
  * @pre
@@ -257,7 +275,21 @@ void ui::GetSSurf(SDL_Texture* texture)
  */
 
 
-JSObject* const ui::createHTMLInfoObject(const std::string& searchPaths) const
+JSObject* const ui::createHTMLInfoObject(const std::string searchPaths[]) const
 {
-	
+    std::vector<std::string> files = LPI::getFilesInFolder(searchPaths);
+
+    for(std::string file : files)
+    {
+        switch(LPI::getFileType(LPI::getExtention(file)))
+        {
+
+            case LPI::D_VIDEO:
+                JSON_Helper::JSON_MOVIE *m = new JSON_Helper::JSON_MOVIE(LPI::getFileName(file), file, );
+                break;
+        }
+    }
 }
+
+
+

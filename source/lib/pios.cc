@@ -8,7 +8,7 @@ Pios::Pios():
 
 Pios::~Pios()
 {
-	
+	userInterface->stop();
 }
 
 void Pios::run()

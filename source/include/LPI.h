@@ -14,6 +14,16 @@ namespace LPI
 	bool ChangeSetting(std::string setting, std::string value);
 	std::vector<std::string> getFilesInFolder(std::string paths[]);
 
+    inline std::string getExtention(std::string file)
+    {
+        return file.substr(file.find_last_of("."));
+    }
+
+    inline std::string getFileName(std::string file)
+    {
+        return file.substr(file.find_last_of("/"), file.find_last_of("."));
+    }
+
 	typedef	enum e_tFile
 	{
 		D_VIDEO 	= 1 << 0,

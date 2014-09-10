@@ -1,3 +1,4 @@
+#include <bits/basic_string.h>
 #include "LPI.h"
 
 namespace LPI
@@ -28,11 +29,12 @@ namespace LPI
  *    Nees to check for possible memmory leaks with reapeted use.
  */
 
+
 	std::vector<std::string> getFilesInFolder(std::string paths[], bool recursive)
 	{
 		std::vector<std::string> Files;
 		if(sizeof(paths) == 0)														//Make sure we were provided some paths
-			return Files;
+			return NULL;
 
 		std::vector<std::string> v_paths(paths, paths + sizeof(paths)/sizeof(paths[0]));
 
@@ -97,4 +99,8 @@ namespace LPI
 	const char* EMULATOR 	= ["ns", "nes", "snes"];			const int EMULATOR_SIZE = 3;
 	const char* GRAPHICS 	= ["png", "bmp", "jpg", "jpeg"];	const int GRAPHICS_SIZE = 4;
 */
+
+
+
+
 };

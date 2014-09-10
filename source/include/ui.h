@@ -25,7 +25,7 @@ public:
 
 	void start();
 	void stop();
-
+    bool terminate();
 	// If the program is in the main focus or not and base the 
 	// amount of actions the program should take
 	void backgroundMood(bool state){ m_backgroundMood = state; }

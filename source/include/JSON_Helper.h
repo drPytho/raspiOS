@@ -178,6 +178,9 @@ namespace JSON_Helper
 		std::string emulator;
 		
 	};
+
+
+
 }
 
 #endif
