@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>LPI.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,176,0); }
+.s1 { color: rgb(106,135,89); }
+.s2 { color: rgb(169,183,198); }
+.s3 { color: rgb(204,120,50); }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+.s5 { color: rgb(104,151,187); }
+.s6 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+LPI.cc</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="ln">1    </span></a><span class="s0">#include</span><span class="s1"> &quot;LPI.h&quot;</span><span class="s2"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s3">namespace </span><span class="s2">LPI 
+<a name="l4"><span class="ln">4    </span></a>{    
+<a name="l5"><span class="ln">5    </span></a>    </span><span class="s3">bool </span><span class="s2">StartEmulator(std::string game) 
+<a name="l6"><span class="ln">6    </span></a>    { 
+<a name="l7"><span class="ln">7    </span></a>        </span><span class="s3">return false;</span><span class="s2"> 
+<a name="l8"><span class="ln">8    </span></a>    } 
+<a name="l9"><span class="ln">9    </span></a> 
+<a name="l10"><span class="ln">10   </span></a>    </span><span class="s3">bool </span><span class="s2">ChangeSetting(std::string setting</span><span class="s3">, </span><span class="s2">std::string value) 
+<a name="l11"><span class="ln">11   </span></a>    { 
+<a name="l12"><span class="ln">12   </span></a>        </span><span class="s3">return false;</span><span class="s2"> 
+<a name="l13"><span class="ln">13   </span></a>    } 
+<a name="l14"><span class="ln">14   </span></a> 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s4">/** 
+<a name="l16"><span class="ln">16   </span></a> * @description 
+<a name="l17"><span class="ln">17   </span></a> *    gathers all the fils in a number of folders 
+<a name="l18"><span class="ln">18   </span></a> * @param [0] paths 
+<a name="l19"><span class="ln">19   </span></a> *    An array of paths to search through 
+<a name="l20"><span class="ln">20   </span></a> * @param [1] recursive 
+<a name="l21"><span class="ln">21   </span></a> *    If it should be a recursive search or not 
+<a name="l22"><span class="ln">22   </span></a> * @return 
+<a name="l23"><span class="ln">23   </span></a> *    A vector with all the files in it  
+<a name="l24"><span class="ln">24   </span></a> * @throw 
+<a name="l25"><span class="ln">25   </span></a> *    Nothing 
+<a name="l26"><span class="ln">26   </span></a> * 
+<a name="l27"><span class="ln">27   </span></a> * @note 
+<a name="l28"><span class="ln">28   </span></a> *    Nees to check for possible memmory leaks with reapeted use. 
+<a name="l29"><span class="ln">29   </span></a> */</span><span class="s2"> 
+<a name="l30"><span class="ln">30   </span></a> 
+<a name="l31"><span class="ln">31   </span></a>    std::vector&lt;std::string&gt; getFilesInFolder(std::string paths[]</span><span class="s3">, bool </span><span class="s2">recursive) 
+<a name="l32"><span class="ln">32   </span></a>    { 
+<a name="l33"><span class="ln">33   </span></a>        std::vector&lt;std::string&gt; Files</span><span class="s3">;</span><span class="s2"> 
+<a name="l34"><span class="ln">34   </span></a>        </span><span class="s3">if</span><span class="s2">(</span><span class="s3">sizeof</span><span class="s2">(paths) == </span><span class="s5">0</span><span class="s2">)                                                      </span><span class="s6">//Make sure we were provided some paths</span><span class="s2"> 
+<a name="l35"><span class="ln">35   </span></a>            </span><span class="s3">return </span><span class="s2">Files</span><span class="s3">;</span><span class="s2"> 
+<a name="l36"><span class="ln">36   </span></a> 
+<a name="l37"><span class="ln">37   </span></a>        std::vector&lt;std::string&gt; v_paths(paths</span><span class="s3">, </span><span class="s2">paths + </span><span class="s3">sizeof</span><span class="s2">(paths)/</span><span class="s3">sizeof</span><span class="s2">(paths[</span><span class="s5">0</span><span class="s2">]))</span><span class="s3">;</span><span class="s2"> 
+<a name="l38"><span class="ln">38   </span></a> 
+<a name="l39"><span class="ln">39   </span></a>        </span><span class="s3">int </span><span class="s2">searchPaths = v_paths.size()</span><span class="s3">;                                           </span><span class="s6">//Get the number of paths</span><span class="s2"> 
+<a name="l40"><span class="ln">40   </span></a>         
+<a name="l41"><span class="ln">41   </span></a>        DIR *dp</span><span class="s3">;</span><span class="s2"> 
+<a name="l42"><span class="ln">42   </span></a>        </span><span class="s3">struct </span><span class="s2">dirent *dirp</span><span class="s3">;</span><span class="s2"> 
+<a name="l43"><span class="ln">43   </span></a>         
+<a name="l44"><span class="ln">44   </span></a> 
+<a name="l45"><span class="ln">45   </span></a>        </span><span class="s3">for</span><span class="s2">(</span><span class="s3">int </span><span class="s2">i = </span><span class="s5">0</span><span class="s3">; </span><span class="s2">i &lt; searchPaths</span><span class="s3">; </span><span class="s2">i++)                                        </span><span class="s6">//Loop through the paths</span><span class="s2"> 
+<a name="l46"><span class="ln">46   </span></a>        { 
+<a name="l47"><span class="ln">47   </span></a>            </span><span class="s3">if</span><span class="s2">((dp = opendir(paths[i].c_str())) == NULL)                                    </span><span class="s6">//Directory do not exist.... Or something else</span><span class="s2"> 
+<a name="l48"><span class="ln">48   </span></a>                </span><span class="s3">continue;                                                           </span><span class="s6">//Move on to the next path</span><span class="s2"> 
+<a name="l49"><span class="ln">49   </span></a> 
+<a name="l50"><span class="ln">50   </span></a>            </span><span class="s3">while</span><span class="s2">((dirp = readdir(dp)) != NULL)                                     </span><span class="s6">//Aslong as we get a new dirent structure there is a new file there with a name on it</span><span class="s2"> 
+<a name="l51"><span class="ln">51   </span></a>            { 
+<a name="l52"><span class="ln">52   </span></a>                </span><span class="s3">if</span><span class="s2">(dirp-&gt;d_type == </span><span class="s5">0x4</span><span class="s2">)                                             </span><span class="s6">//if it's a folder</span><span class="s2"> 
+<a name="l53"><span class="ln">53   </span></a>                { 
+<a name="l54"><span class="ln">54   </span></a>                    </span><span class="s3">if</span><span class="s2">(recursive)                                                   </span><span class="s6">//if it's a recursive search</span><span class="s2"> 
+<a name="l55"><span class="ln">55   </span></a>                    { 
+<a name="l56"><span class="ln">56   </span></a>                        v_paths.push_back(v_paths[i] + </span><span class="s1">&quot;/&quot; </span><span class="s2">+ std::string(dirp-&gt;d_name))</span><span class="s3">;    </span><span class="s6">//add the dir to the directories to search</span><span class="s2"> 
+<a name="l57"><span class="ln">57   </span></a>                        searchPaths++</span><span class="s3">;</span><span class="s2"> 
+<a name="l58"><span class="ln">58   </span></a>                    } 
+<a name="l59"><span class="ln">59   </span></a>                }</span><span class="s3">else</span><span class="s2">{                                                              </span><span class="s6">//Othervise</span><span class="s2"> 
+<a name="l60"><span class="ln">60   </span></a>                    Files.push_back(v_paths[i] + </span><span class="s1">&quot;/&quot; </span><span class="s2">+ std::string(dirp-&gt;d_name))</span><span class="s3">;      </span><span class="s6">//Get the god damn name</span><span class="s2"> 
+<a name="l61"><span class="ln">61   </span></a>                } 
+<a name="l62"><span class="ln">62   </span></a>            } 
+<a name="l63"><span class="ln">63   </span></a>        } 
+<a name="l64"><span class="ln">64   </span></a> 
+<a name="l65"><span class="ln">65   </span></a>        </span><span class="s3">return </span><span class="s2">Files</span><span class="s3">;                                                               </span><span class="s6">//Pass it forward :)</span><span class="s2"> 
+<a name="l66"><span class="ln">66   </span></a>    } 
+<a name="l67"><span class="ln">67   </span></a> 
+<a name="l68"><span class="ln">68   </span></a>    fType getFileType(</span><span class="s3">char</span><span class="s2">* extention) 
+<a name="l69"><span class="ln">69   </span></a>    { 
+<a name="l70"><span class="ln">70   </span></a>        </span><span class="s6">//Lowaecase extention</span><span class="s2"> 
+<a name="l71"><span class="ln">71   </span></a>        </span><span class="s3">for</span><span class="s2">(</span><span class="s3">int </span><span class="s2">i = </span><span class="s5">0</span><span class="s3">; </span><span class="s2">i &lt; (VIDEO_SIZE + AUDIO_SIZE + EMULATOR_SIZE + GRAPHICS_SIZE)</span><span class="s3">; </span><span class="s2">i++) 
+<a name="l72"><span class="ln">72   </span></a>        { 
+<a name="l73"><span class="ln">73   </span></a>            </span><span class="s3">if </span><span class="s2">(i &lt; VIDEO_SIZE) 
+<a name="l74"><span class="ln">74   </span></a>            { 
+<a name="l75"><span class="ln">75   </span></a>                </span><span class="s3">if</span><span class="s2">(!strcmp(VIDEO[i]</span><span class="s3">, </span><span class="s2">extention)) 
+<a name="l76"><span class="ln">76   </span></a>                    </span><span class="s3">return </span><span class="s2">LPI::D_VIDEO</span><span class="s3">;</span><span class="s2"> 
+<a name="l77"><span class="ln">77   </span></a>            }</span><span class="s3">else if</span><span class="s2">(i &lt; (AUDIO_SIZE + VIDEO_SIZE)) 
+<a name="l78"><span class="ln">78   </span></a>            { 
+<a name="l79"><span class="ln">79   </span></a>                </span><span class="s3">if</span><span class="s2">(!strcmp(AUDIO[i - VIDEO_SIZE]</span><span class="s3">, </span><span class="s2">extention)) 
+<a name="l80"><span class="ln">80   </span></a>                    </span><span class="s3">return </span><span class="s2">LPI::D_AUDIO</span><span class="s3">;</span><span class="s2"> 
+<a name="l81"><span class="ln">81   </span></a>            }</span><span class="s3">else if</span><span class="s2">(i &lt; (AUDIO_SIZE + VIDEO_SIZE + EMULATOR_SIZE)) 
+<a name="l82"><span class="ln">82   </span></a>            { 
+<a name="l83"><span class="ln">83   </span></a>                </span><span class="s3">if</span><span class="s2">(!strcmp(EMULATOR[i - (VIDEO_SIZE + AUDIO_SIZE)]</span><span class="s3">, </span><span class="s2">extention)) 
+<a name="l84"><span class="ln">84   </span></a>                    </span><span class="s3">return </span><span class="s2">LPI::D_EMULATOR</span><span class="s3">;</span><span class="s2"> 
+<a name="l85"><span class="ln">85   </span></a>            }</span><span class="s3">else if</span><span class="s2">(i &lt; (AUDIO_SIZE + VIDEO_SIZE + EMULATOR_SIZE)) 
+<a name="l86"><span class="ln">86   </span></a>            { 
+<a name="l87"><span class="ln">87   </span></a>                </span><span class="s3">if</span><span class="s2">(!strcmp(GRAPHICS[i - (VIDEO_SIZE + AUDIO_SIZE + EMULATOR_SIZE)]</span><span class="s3">, </span><span class="s2">extention)) 
+<a name="l88"><span class="ln">88   </span></a>                    </span><span class="s3">return </span><span class="s2">LPI::D_GRAPHICS</span><span class="s3">;</span><span class="s2"> 
+<a name="l89"><span class="ln">89   </span></a>            } 
+<a name="l90"><span class="ln">90   </span></a>        } 
+<a name="l91"><span class="ln">91   </span></a>        </span><span class="s3">return </span><span class="s2">LPI::D_OTHER</span><span class="s3">;</span><span class="s2"> 
+<a name="l92"><span class="ln">92   </span></a>    } 
+<a name="l93"><span class="ln">93   </span></a> 
+<a name="l94"><span class="ln">94   </span></a></span><span class="s4">/* 
+<a name="l95"><span class="ln">95   </span></a>    const char* VIDEO       = [&quot;mp4&quot;, &quot;avi&quot;];                   const int VIDEO_SIZE = 2; 
+<a name="l96"><span class="ln">96   </span></a>    const char* AUDIO       = [&quot;mp3&quot;, &quot;wav&quot;, &quot;raw&quot;];            const int AUDIO_SIZE = 3; 
+<a name="l97"><span class="ln">97   </span></a>    const char* EMULATOR    = [&quot;ns&quot;, &quot;nes&quot;, &quot;snes&quot;];            const int EMULATOR_SIZE = 3; 
+<a name="l98"><span class="ln">98   </span></a>    const char* GRAPHICS    = [&quot;png&quot;, &quot;bmp&quot;, &quot;jpg&quot;, &quot;jpeg&quot;];    const int GRAPHICS_SIZE = 4; 
+<a name="l99"><span class="ln">99   </span></a>*/</span><span class="s2"> 
+<a name="l100"><span class="ln">100  </span></a>}</span><span class="s3">;</span></pre>
+</body>
+</html>

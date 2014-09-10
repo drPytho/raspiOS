@@ -1,5 +1,4 @@
 #include "window.h"
-//#include <SDL2/SDL.h>
 
 Window::Window(int width, int height, const std::string& title)
 :	m_width(width),
