@@ -1,0 +1,10 @@
+
+set(raspiOS-lib_SRC
+            profiling.cc
+            window.cc
+            LPI.cc
+            input.cc
+            ui.cc
+            pios.cc)
+
+add_library(raspiOS-lib ${raspiOS-lib_SRC})
