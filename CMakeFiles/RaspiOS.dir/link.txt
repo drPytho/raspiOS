@@ -1,0 +1,1 @@
+/usr/bin/c++   -g    CMakeFiles/RaspiOS.dir/src/window.cc.o CMakeFiles/RaspiOS.dir/src/main.cc.o CMakeFiles/RaspiOS.dir/src/pios.cc.o CMakeFiles/RaspiOS.dir/src/ui.cc.o CMakeFiles/RaspiOS.dir/src/LPI.cc.o CMakeFiles/RaspiOS.dir/src/input.cc.o CMakeFiles/RaspiOS.dir/src/profiling.cc.o  -o RaspiOS -rdynamic -lSDL2 -lawesomium-1-7 

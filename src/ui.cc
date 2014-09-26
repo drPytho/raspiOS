@@ -1,4 +1,5 @@
 #include "ui.h"
+#include "JSON_Helper.h"
 
 #define FRAME_CAP 5000
 #define FRAME_TIME 1.0/FRAME_CAP
@@ -51,7 +52,7 @@ ui::~ui()
 */
 bool ui::terminate()
 {
-
+    return false;
 }
 
 

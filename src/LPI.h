@@ -42,7 +42,7 @@ namespace LPI
 	const char* const GRAPHICS[] 	= {"png", "bmp", "jpg", "jpeg"};	const int GRAPHICS_SIZE = 4;
 
 
-	fType getFileType(char* extention);
+    tFile getFileType(char* extention);
 }
 
 
